@@ -1,0 +1,373 @@
+:root {
+  font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  color: #243247;
+  background: #eee9dc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --cloud: #eee9dc;
+  --meadow: #36b898;
+  --coral: #d98555;
+  --violet: #3f6ca8;
+  --gold: #ffc46b;
+  --ink: #243247;
+  --shell: #f9fcfb;
+  --danger: #c84c4c;
+  --line: rgba(70, 74, 76, 0.18);
+  --shadow: rgba(61, 55, 44, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+button {
+  font: inherit;
+}
+.game-shell,
+.game-canvas {
+  width: 100%;
+  height: 100%;
+}
+.game-shell {
+  position: relative;
+  isolation: isolate;
+  background: var(--cloud);
+}
+.game-canvas canvas {
+  display: block;
+  outline: none;
+}
+
+.game-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.resource-rail,
+.build-tray,
+.wave-controls,
+.end-overlay {
+  pointer-events: auto;
+}
+
+.resource-rail {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  display: flex;
+  width: min(62rem, calc(100vw - 2rem));
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.85rem 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: rgba(249, 247, 239, 0.95);
+  box-shadow: 0 0.65rem 2rem var(--shadow);
+  transform: translateX(-50%);
+  backdrop-filter: blur(10px);
+}
+
+.game-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.signal-dot {
+  width: 0.75rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  background: var(--gold);
+}
+.game-identity p,
+.utility-label {
+  margin: 0;
+  color: #586579;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.game-identity h1 {
+  margin: 0.12rem 0 0;
+  font-family: 'Arial Rounded MT Bold', 'Avenir Next', sans-serif;
+  font-size: 1.18rem;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.resources {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(4.2rem, 1fr));
+  margin: 0;
+}
+.resources div {
+  padding: 0.12rem 1rem;
+  border-left: 1px solid var(--line);
+}
+.resources dt {
+  color: #687487;
+  font-size: 0.68rem;
+}
+.resources dd {
+  margin: 0.08rem 0 0;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.build-tray,
+.wave-controls {
+  position: absolute;
+  bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: rgba(249, 247, 239, 0.96);
+  box-shadow: 0 0.65rem 2rem var(--shadow);
+  backdrop-filter: blur(10px);
+}
+.build-tray {
+  left: 1rem;
+  width: min(22rem, calc(100vw - 2rem));
+}
+.wave-controls {
+  right: 1rem;
+  display: flex;
+  min-width: 20rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+.build-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.build-heading h2,
+.end-overlay h2 {
+  margin: 0.16rem 0 0;
+  font-family: 'Arial Rounded MT Bold', 'Avenir Next', sans-serif;
+  letter-spacing: -0.035em;
+}
+.build-heading h2 {
+  font-size: 1.2rem;
+}
+.tower-cost {
+  padding: 0.3rem 0.48rem;
+  border-radius: 0.35rem;
+  color: #8a5d18;
+  background: rgba(255, 196, 107, 0.22);
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.tower-summary {
+  margin: 0.45rem 0 0.8rem;
+  color: #586579;
+  font-size: 0.78rem;
+}
+.build-actions,
+.wave-actions {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.build-button,
+.primary-action,
+.secondary-action,
+.text-button {
+  min-height: 2.55rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-weight: 800;
+}
+.build-button,
+.primary-action {
+  border: 1px solid var(--violet);
+  color: var(--shell);
+  background: var(--violet);
+}
+.build-button {
+  min-width: 8.5rem;
+  padding: 0.55rem 0.9rem;
+}
+.build-button.is-selected {
+  border-color: #d9a247;
+  color: var(--ink);
+  background: var(--gold);
+}
+.build-button:disabled {
+  cursor: not-allowed;
+  border-color: #aab3bd;
+  background: #aab3bd;
+}
+.primary-action {
+  padding: 0.55rem 1rem;
+}
+.secondary-action,
+.text-button {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: transparent;
+}
+.secondary-action {
+  padding: 0.55rem 0.85rem;
+}
+.text-button {
+  padding: 0.55rem 0.75rem;
+}
+.build-button:hover:not(:disabled),
+.primary-action:hover {
+  filter: brightness(0.92);
+}
+.secondary-action:hover,
+.text-button:hover {
+  border-color: var(--ink);
+}
+.build-button:focus-visible,
+.primary-action:focus-visible,
+.secondary-action:focus-visible,
+.text-button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.placement-message {
+  min-height: 1rem;
+  margin: 0.65rem 0 0;
+  color: #687487;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+.phase-label {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.end-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(28rem, calc(100vw - 2rem));
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  background: var(--shell);
+  box-shadow: 0 1.5rem 5rem rgba(36, 50, 71, 0.28);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.end-overlay h2 {
+  font-size: 1.8rem;
+}
+.end-overlay > p:not(.utility-label) {
+  margin: 0.6rem auto 1.2rem;
+  color: #586579;
+  line-height: 1.5;
+}
+
+.webgl-fallback {
+  display: grid;
+  min-height: 100%;
+  margin: 0;
+  place-items: center;
+  color: var(--ink);
+  background: var(--cloud);
+}
+
+@media (max-width: 720px) {
+  .resource-rail {
+    top: 0.6rem;
+    width: calc(100vw - 1.2rem);
+    min-height: auto;
+    padding: 0.62rem 0.7rem;
+    border-radius: 0.75rem;
+  }
+  .signal-dot {
+    width: 0.45rem;
+    height: 2.2rem;
+  }
+  .game-identity p {
+    display: none;
+  }
+  .game-identity h1 {
+    max-width: 5.5rem;
+    font-size: 0.95rem;
+    line-height: 0.9;
+  }
+  .resources {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .resources div {
+    padding: 0 0.38rem;
+    text-align: center;
+  }
+  .resources dt {
+    font-size: 0.57rem;
+  }
+  .resources dd {
+    font-size: 0.8rem;
+  }
+  .build-tray {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    left: 0.6rem;
+    width: auto;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+  }
+  .tower-summary {
+    display: none;
+  }
+  .build-heading h2 {
+    font-size: 1rem;
+  }
+  .build-actions {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+  }
+  .build-button,
+  .text-button {
+    min-height: 2.25rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.74rem;
+  }
+  .placement-message {
+    max-width: 55%;
+    margin-top: 0.45rem;
+  }
+  .wave-controls {
+    right: 0.6rem;
+    bottom: 7rem;
+    left: 0.6rem;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.75rem;
+  }
+  .wave-controls .utility-label {
+    display: none;
+  }
+  .phase-label {
+    margin: 0;
+    font-size: 0.75rem;
+  }
+  .primary-action,
+  .secondary-action {
+    min-height: 2.25rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.72rem;
+  }
+}

@@ -1,0 +1,21 @@
+const BASE = '/models/kenney/hexagon-kit'
+
+export const MODEL_PATHS = {
+  grass: `${BASE}/grass.glb`,
+  grassForest: `${BASE}/grass-forest.glb`,
+  grassHill: `${BASE}/grass-hill.glb`,
+  stoneRocks: `${BASE}/stone-rocks.glb`,
+  stoneMountain: `${BASE}/stone-mountain.glb`,
+  water: `${BASE}/water.glb`,
+  waterRocks: `${BASE}/water-rocks.glb`,
+  pathStraight: `${BASE}/path-straight.glb`,
+  pathCorner: `${BASE}/path-corner.glb`,
+  pathCornerSharp: `${BASE}/path-corner-sharp.glb`,
+  pathEnd: `${BASE}/path-end.glb`,
+  pathStart: `${BASE}/path-start.glb`,
+  castle: `${BASE}/building-castle.glb`,
+  archery: `${BASE}/building-archery.glb`,
+  village: `${BASE}/building-village.glb`,
+  wizardTower: `${BASE}/building-wizard-tower.glb`,
+  arcaneTower: `${BASE}/unit-tower.glb`,
+} as const
