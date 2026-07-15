@@ -75,12 +75,12 @@ describe('game actions', () => {
 
   it('supports a complete winnable three-wave run with planned placements', () => {
     const positions = [
-      { q: -4, r: 1 },
-      { q: -2, r: 1 },
-      { q: -2, r: 2 },
-      { q: 1, r: 2 },
-      { q: 1, r: 0 },
-      { q: 3, r: -1 },
+      { q: -7, r: 3 },
+      { q: -5, r: 3 },
+      { q: -4, r: 4 },
+      { q: -2, r: 3 },
+      { q: 0, r: 1 },
+      { q: 3, r: 0 },
     ]
     let state = createInitialState()
     let nextPosition = 0
@@ -92,7 +92,7 @@ describe('game actions', () => {
     for (let wave = 0; wave < 3; wave += 1) {
       state = startNextWave(state)
       let ticks = 0
-      while (state.phase === 'wave-active' && ticks < 500) {
+      while (state.phase === 'wave-active' && ticks < 900) {
         state = advanceGame(state, 0.05)
         ticks += 1
       }

@@ -29,7 +29,7 @@ export function GameScene() {
         rotation={[-Math.PI / 2, 0, 0]}
         receiveShadow
       >
-        <circleGeometry args={[10.5, 64]} />
+        <circleGeometry args={[14.5, 64]} />
         <meshStandardMaterial color="#e4ddcd" roughness={0.95} />
       </mesh>
     </>

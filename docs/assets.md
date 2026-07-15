@@ -10,7 +10,7 @@
 
 The complete browser-ready GLB set is included so the island can be restyled with the pack's terrain, river, path, building, and unit variants without another import. The source archive's FBX, OBJ, previews, and alternate color-map images are not runtime assets.
 
-Currently referenced models include grass, forest, hill, stone, water, path, castle, village, archery, and tower assets. Goblins, slimes, the rune gate, and magical projectiles are lightweight Three.js geometry because this terrain pack does not include creatures.
+Currently referenced models include grass, forest, hill, stone, water, path, castle, village, archery, cabin, farm, market, mill, mine, sheep, wizard, and tower assets. Goblins, slimes, the rune gate, and magical projectiles are lightweight Three.js geometry because this terrain pack does not include creatures.
 
 Attribution is not required by CC0. This project voluntarily credits Kenney for the prototype assets.
 

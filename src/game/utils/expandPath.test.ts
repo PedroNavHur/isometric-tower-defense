@@ -18,8 +18,8 @@ describe('expandPath', () => {
       { q: 2, r: -2 },
     ])
   })
-  it('creates the complete 19-cell authored route', () =>
-    expect(PATH_CELLS).toHaveLength(19))
+  it('creates the complete 26-cell authored route', () =>
+    expect(PATH_CELLS).toHaveLength(26))
   it('rejects movement that is not an axial direction', () => {
     expect(() =>
       expandPath([

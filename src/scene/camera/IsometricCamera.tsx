@@ -1,11 +1,11 @@
 import { MapControls, OrthographicCamera } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 
-const CAMERA_POSITION: readonly [number, number, number] = [8.5, 9.5, 9]
+const CAMERA_POSITION: readonly [number, number, number] = [11, 12, 12]
 
 export function IsometricCamera() {
   const { height, width } = useThree((state) => state.size)
-  const baselineZoom = Math.max(18, Math.min(74, width / 19, height / 13.5))
+  const baselineZoom = Math.max(15, Math.min(62, width / 25, height / 17.5))
 
   return (
     <>

@@ -10,7 +10,7 @@ React owns the HTML interface and React Three Fiber scene graph. Vite supplies t
 
 ## Axial hex island and route
 
-The island is the union of three authored axial-coordinate lobes. Its 74 terrain hexes form an asymmetric crescent, while the neighboring water ring is derived automatically from missing axial neighbors. Enemies follow an authored S-curve expanded into adjacent path cells.
+The island is the union of five authored axial-coordinate lobes. Its 149 terrain hexes form a broad asymmetric crescent, while the neighboring water ring is derived automatically from missing axial neighbors. Enemies follow an authored 26-cell S-curve whose direction changes are limited to gentle 60-degree turns.
 
 Enemy position is stored as scalar `pathProgress`; `pathProgressToHexPoint` produces a fractional axial point for range checks and rendering. `hexToWorld` maps pointy axial coordinates to the Kenney tile dimensions only at the rendering boundary. A derived board offset centers the irregular island without putting Three.js vectors into game state.
 

@@ -5,7 +5,7 @@ import { selectTarget } from './selectTarget'
 const tower: TowerState = {
   id: 'tower-1',
   kind: 'pulseTower',
-  position: { q: -2, r: 1 },
+  position: { q: -7, r: 3 },
   cooldownRemaining: 0,
   targetEnemyId: null,
 }

@@ -8,28 +8,33 @@ import {
 } from '../utils/hexCoordinates'
 
 export const PATH_WAYPOINTS: readonly HexPosition[] = [
-  { q: -5, r: 0 },
-  { q: -3, r: 0 },
-  { q: -3, r: 3 },
-  { q: 0, r: 3 },
-  { q: 0, r: 1 },
-  { q: 2, r: 1 },
-  { q: 2, r: -2 },
-  { q: 5, r: -5 },
+  { q: -9, r: 2 },
+  { q: -6, r: 2 },
+  { q: -6, r: 5 },
+  { q: -2, r: 5 },
+  { q: 1, r: 2 },
+  { q: 3, r: 2 },
+  { q: 5, r: 0 },
+  { q: 5, r: -2 },
+  { q: 7, r: -4 },
+  { q: 7, r: -6 },
+  { q: 9, r: -8 },
 ]
 
 export const PATH_CELLS = expandPath(PATH_WAYPOINTS)
 export const PATH_LENGTH = PATH_CELLS.length - 1
 
 const ISLAND_LOBES = [
-  { center: { q: -3, r: 1 }, radius: 3 },
-  { center: { q: 0, r: 1 }, radius: 2 },
-  { center: { q: 3, r: -2 }, radius: 3 },
+  { center: { q: -5, r: 2 }, radius: 4 },
+  { center: { q: -1, r: 3 }, radius: 3 },
+  { center: { q: 1, r: 1 }, radius: 3 },
+  { center: { q: 5, r: -2 }, radius: 4 },
+  { center: { q: 7, r: -6 }, radius: 2 },
 ] as const
 
 export const MAP_POSITIONS: readonly HexPosition[] = Array.from(
-  { length: 15 * 15 },
-  (_, index) => ({ q: (index % 15) - 7, r: Math.floor(index / 15) - 7 }),
+  { length: 21 * 21 },
+  (_, index) => ({ q: (index % 21) - 10, r: Math.floor(index / 21) - 10 }),
 ).filter((position) =>
   ISLAND_LOBES.some(
     ({ center, radius }) => hexDistance(position, center) <= radius,
@@ -37,16 +42,30 @@ export const MAP_POSITIONS: readonly HexPosition[] = Array.from(
 )
 
 export const DECORATION_CELLS: readonly HexPosition[] = [
-  { q: -6, r: 2 },
-  { q: -5, r: 3 },
-  { q: -4, r: -1 },
+  { q: -8, r: 4 },
+  { q: -7, r: 0 },
+  { q: -7, r: 5 },
+  { q: -6, r: 1 },
+  { q: -5, r: -1 },
+  { q: -4, r: 3 },
+  { q: -4, r: 6 },
+  { q: -3, r: 1 },
   { q: -3, r: 4 },
-  { q: -1, r: -1 },
-  { q: 1, r: -2 },
+  { q: -2, r: 0 },
+  { q: 0, r: 4 },
+  { q: 0, r: -1 },
+  { q: 1, r: 3 },
   { q: 3, r: 1 },
-  { q: 4, r: -1 },
-  { q: 4, r: -5 },
-  { q: 5, r: -3 },
+  { q: 3, r: -2 },
+  { q: 4, r: 0 },
+  { q: 4, r: -4 },
+  { q: 5, r: 2 },
+  { q: 6, r: -1 },
+  { q: 6, r: -6 },
+  { q: 7, r: -3 },
+  { q: 7, r: -7 },
+  { q: 8, r: -5 },
+  { q: 9, r: -7 },
 ]
 
 const mapKeys = new Set(MAP_POSITIONS.map(hexKey))
