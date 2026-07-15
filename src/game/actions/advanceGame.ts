@@ -103,7 +103,14 @@ function fireTowers(state: SimulationState, delta: number): SimulationState {
     const cooldownRemaining = Math.max(0, tower.cooldownRemaining - delta)
     const target = selectTarget(tower, state.enemies)
     if (!target || cooldownRemaining > 0) {
-      return { ...tower, cooldownRemaining, targetEnemyId: target?.id ?? null }
+      const targetEnemyId = target?.id ?? null
+      if (
+        cooldownRemaining === tower.cooldownRemaining &&
+        targetEnemyId === tower.targetEnemyId
+      ) {
+        return tower
+      }
+      return { ...tower, cooldownRemaining, targetEnemyId }
     }
 
     const targetPoint = pathProgressToHexPoint(target.pathProgress)

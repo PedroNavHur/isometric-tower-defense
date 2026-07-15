@@ -12,10 +12,11 @@ type BuildTileProps = { position: HexPosition }
 
 export function BuildTile({ position }: BuildTileProps) {
   const selectedBuild = useGameStore((state) => state.selectedBuild)
-  const hoveredTile = useGameStore((state) => state.hoveredTile)
+  const isHovered = useGameStore((state) =>
+    state.hoveredTile ? positionsMatch(state.hoveredTile, position) : false,
+  )
   const setHoveredTile = useGameStore((state) => state.setHoveredTile)
   const placeTower = useGameStore((state) => state.placeTower)
-  const isHovered = hoveredTile ? positionsMatch(hoveredTile, position) : false
   const canBuild = selectedBuild
     ? getPlacementFailure(useGameStore.getState(), selectedBuild, position) ===
       null

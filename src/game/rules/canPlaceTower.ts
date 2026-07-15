@@ -1,11 +1,16 @@
 import { DECORATION_CELLS, PATH_CELLS } from '../config/map'
 import { TOWER_STATS } from '../config/balance'
+import { hexKey } from '../utils/hexCoordinates'
 import type {
   HexPosition,
   PlacementFailure,
   SimulationState,
   TowerKind,
 } from '../types/towerDefense'
+
+const UNBUILDABLE_CELL_KEYS = new Set(
+  [...PATH_CELLS, ...DECORATION_CELLS].map(hexKey),
+)
 
 export function positionsMatch(left: HexPosition, right: HexPosition) {
   return left.q === right.q && left.r === right.r
@@ -17,10 +22,7 @@ export function getPlacementFailure(
   position: HexPosition,
 ): PlacementFailure | null {
   if (state.phase === 'victory' || state.phase === 'defeat') return 'game-ended'
-  if (
-    PATH_CELLS.some((cell) => positionsMatch(cell, position)) ||
-    DECORATION_CELLS.some((cell) => positionsMatch(cell, position))
-  ) {
+  if (UNBUILDABLE_CELL_KEYS.has(hexKey(position))) {
     return 'not-buildable'
   }
   if (state.towers.some((tower) => positionsMatch(tower.position, position))) {
